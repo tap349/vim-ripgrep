@@ -33,15 +33,15 @@ fun! s:RgSearchTerm(txt)
 endfun
 
 fun! s:RgSearch(txt)
-  silent! exe 'grep! ' . a:txt
-  if len(getqflist())
-    copen
+  silent exe 'lgrep! ' . a:txt
+  if len(getloclist(0))
+    lopen
     redraw!
     if exists('g:rg_highlight')
       call s:RgHighlight(a:txt)
     endif
   else
-    cclose
+    lclose
     redraw!
     echo "No match found for " . a:txt
   endif
